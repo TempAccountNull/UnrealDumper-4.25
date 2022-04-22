@@ -69,6 +69,136 @@ struct {
 static_assert(sizeof(Default) == sizeof(Offsets));
 
 struct {
+    uint16 Stride = 2;
+    struct {
+        uint16 Size = 24;
+    } FUObjectItem;
+    struct {
+        uint16 Number = 4;
+    } FName;
+    struct {
+        uint16 Info = 0;
+        uint16 WideBit = 0;
+        uint16 LenBit = 6;
+        uint16 HeaderSize = 2;
+    } FNameEntry;
+    struct {
+        uint16 Index = 0xC;
+        uint16 Class = 0x10;
+        uint16 Name = 0x18;
+        uint16 Outer = 0x20;
+    } UObject;
+    struct {
+        uint16 Next = 0x28;
+    } UField;
+    struct {
+        uint16 SuperStruct = 0x40;
+        uint16 Children = 0x48;
+        uint16 ChildProperties = 0x00; // Don't use this on unreal 4.24.x
+        uint16 PropertiesSize = 0x50;
+    } UStruct;
+    struct {
+        uint16 Names = 0x40;
+    } UEnum;
+    struct {
+        uint16 FunctionFlags = 0x98;
+        uint16 Func = 0x98 + 0x28;
+    } UFunction;
+    struct {
+        // Only use this for 4.25+
+        uint16 Class = 0x8;
+        uint16 Next = 0x20;
+        uint16 Name = 0x28;
+    } FField;
+    struct {
+        // Only use this for 4.25+
+        uint16 ArrayDim = 0x38;
+        uint16 ElementSize = 0x3C;
+        uint16 PropertyFlags = 0x40;
+        uint16 Offset = 0x4C;
+        uint16 Size = 0x78;
+    } FProperty;
+    struct {
+        uint16 ArrayDim = 0x30;
+        uint16 ElementSize = 0x34;
+        uint16 PropertyFlags = 0x38;
+        uint16 Offset = 0x44;
+        uint16 Size = 0x70; // sizeof(UProperty)
+    } UProperty;
+} Default424;
+static_assert(sizeof(Default424) == sizeof(Offsets));
+
+struct
+{
+    uint16 Stride = 2;
+    struct
+    {
+        uint16 Size = 24;
+    } FUObjectItem;
+    struct
+    {
+        uint16 Number = 4;
+    } FName;
+    struct
+    {
+        uint16 Info = 0;
+        uint16 WideBit = 0;
+        uint16 LenBit = 6;
+        uint16 HeaderSize = 2;
+    } FNameEntry;
+    struct
+    {
+        uint16 Index = 0xC;
+        uint16 Class = 0x10;
+        uint16 Name = 0x18;
+        uint16 Outer = 0x20;
+    } UObject;
+    struct
+    {
+        uint16 Next = 0x28;
+    } UField;
+    struct
+    {
+        uint16 SuperStruct = 0x40;
+        uint16 Children = 0x48;
+        uint16 ChildProperties = 0;
+        uint16 PropertiesSize = 0x50;
+    } UStruct;
+    struct
+    {
+        uint16 Names = 0x40;
+    } UEnum;
+    struct
+    {
+        uint16 FunctionFlags = 0x98;
+        uint16 Func = 0xC0;
+    } UFunction;
+    struct
+    {
+        uint16 Class = 0;
+        uint16 Next = 0;
+        uint16 Name = 0;
+    } FField;
+    struct
+    {
+        uint16 ArrayDim = 0;
+        uint16 ElementSize = 0;
+        uint16 PropertyFlags = 0;
+        uint16 Offset = 0;
+        uint16 Size = 0;
+    } FProperty;
+    struct
+    {
+        uint16 ArrayDim = 0x30;
+        uint16 ElementSize = 0x34;
+        uint16 PropertyFlags = 0x38;
+        uint16 Offset = 0x44;
+        uint16 Size = 0x70; // sizeof(UProperty)
+    } UProperty;
+} Squad;
+static_assert(sizeof(Squad) == sizeof(Offsets));
+
+struct {
   uint16 Stride = 4;
   struct {
     uint16 Size = 24;
@@ -406,7 +536,19 @@ struct {
 	{"\x48\x8d\x0d\x00\x00\x00\x00\xe8\x00\x00\x00\x00\xc6\x05\x00\x00\x00\x00\x00\x0f\x10\x03", 22}, //GName
 	{"\x48\x8B\x05\x00\x00\x00\x00\xC1\xF9", 9},//Gobject 
 	nullptr
-  }
+  },
+  {//SquadGame.exe
+   &Squad,
+    {"\x4C\x8D\x05\x00\x00\x00\x00\xEB\x16\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00", 22}, //GName
+    {"\x48\x8D\x1D\x00\x00\x00\x00\x8B\x05\x00\x00\x00\x00\x39\x45\x88\x7C\x20\x48\x8D\x45\x88\x48\x89\x85\x90\x05\x00\x00", 30}, //Gobject 
+    nullptr
+  },
+  {//Back4Blood.exe
+  	&Default,
+     { "\x48\x8D\x05\x00\x00\x00\x00\x48\x83\xC4\x00\x5F\xC3\x48\x89\x5C\x24\x00\x48\x8D\x4C\x24\x00\x48\x89\x6C\x24", 28 }, //GName
+  	 { "\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x8B\x0D", 15 },//Gobject 
+     nullptr
+  },
 };
 
 std::unordered_map<std::string, decltype(&engines[0])> games = {
@@ -428,47 +570,83 @@ std::unordered_map<std::string, decltype(&engines[0])> games = {
   {"Dauntless-Win64-Shipping",&engines[12]},
   {"ProjectBoundarySteam-Win64-Shipping",&engines[0]},
   {"Prospect-Win64-Shipping",&engines[0]},
+  {"SquadGame", &engines[13]},
+  {"Back4Blood", &engines[14]},
 };
 
-STATUS EngineInit(std::string game, void* image) {
+enum FOUND_TYPES
+{
+	
+};
 
-  auto it = games.find(game);
-  if (it == games.end()) { return STATUS::ENGINE_NOT_FOUND; }
+STATUS EngineInit(std::string game, void* image)
+{
+  const std::unordered_map<std::string, decltype(&engines[0])>::iterator it = games.find(game);
+  if (it == games.end()) return STATUS::ENGINE_NOT_FOUND;
 
-  auto engine = it->second;
-  offsets = *(Offsets*)(engine->offsets);
+  const auto engine = it->second;
+  offsets = *static_cast<Offsets*>(engine->offsets);
 
   void* names = nullptr; 
   void* objects = nullptr;
 
+  int GlobalObjectsXor = 0x211C;
+  uint64 GObjects = Base + 0x682D0E0;
+  int Object = GObjects ^ GlobalObjectsXor;
+
+  if (GObjects)
+      printf("XOR CHECK\n[OFFSET] Objects: %p\n[XOR]: %p\n", GObjects, Object);
+
   uint8 found = 0;
-  if (!engine->callback) {
+  if (!engine->callback) 
+  {
     found |= 4;
   }
 
-  IterateExSections(
-    image,
-    [&](void* start, void* end)->bool {
+  IterateExSections(image, [&](void* start, void* end)->bool 
+  {
       if (!(found & 1)) if (names = FindPointer(start, end, engine->names.first, engine->names.second)) found |= 1;
       if (!(found & 2)) if (objects = FindPointer(start, end, engine->objects.first, engine->objects.second)) found |= 2;
       if (!(found & 4)) if (engine->callback(start, end)) found |= 4;
-      if (found == 7) return 1;
-      return 0;
+      if (found == 7) return true;
+      return NULL;
     }
   );
 
-  if (found != 7) return STATUS::ENGINE_FAILED;
+    //SIG CHECK
+    if(names || objects)
+        printf("[SIG INFO]: We found both GNames & GObject sigs!\n");
 
-  NamePoolData = *(decltype(NamePoolData)*)names;
-  ObjObjects = *(decltype(ObjObjects)*)objects;
+    else if(!names || objects)
+        printf("[SIG ERR]: We found the object sig, but not the names signature!\n");
 
-  auto entry = UE_FNameEntry(NamePoolData.GetEntry(0));
+    else if (names || !objects)
+        printf("[SIG ERR]: We found the names sig, but not the objects signature!\n");
+
+    else if (!names || !objects)
+    {
+        printf("[SIG ERR]: We found neither Objects or Names signature! Failing as we cannot continue . . . \n");
+        return STATUS::ENGINE_FAILED;
+    }
+
+  if (found != 7)
+  {
+      printf("[ERR]: Found does not equal 7! It equals %i so we're FAILING. . .\n", found);
+      return STATUS::ENGINE_FAILED;
+  }
+
+  NamePoolData = *static_cast<decltype(NamePoolData)*>(names);
+  ObjObjects = *static_cast<decltype(ObjObjects)*>(objects);
+
+  const auto entry = UE_FNameEntry(NamePoolData.GetEntry(0));
 
   // exception handler exclusively for Decrypt_ANSI
   try {
-    if (*(uint32*)entry.String().data() != 'enoN') return STATUS::ENGINE_FAILED;
+    if (*reinterpret_cast<uint32*>(entry.String().data()) != 'enoN') return STATUS::ENGINE_FAILED;
+    printf("[WRN]: None does not exist! FAILING. . .\n");
   }
   catch (...) {
+      printf("[ERR] An error has occurred at FNameEntry engine.cpp! FAILING. . .\n");
     return STATUS::ENGINE_FAILED;
   }
 

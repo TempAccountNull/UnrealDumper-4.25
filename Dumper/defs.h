@@ -5,9 +5,9 @@
 #undef GetObject
 #endif
 
-enum class STATUS {
+enum STATUS {
   SUCCESS,
-  FAILED,
+  FAILED = 1,
   WINDOW_NOT_FOUND,
   PROCESS_NOT_FOUND,
   READER_ERROR,
