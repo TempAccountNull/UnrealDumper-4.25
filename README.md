@@ -1,18 +1,20 @@
 ### Edit engine.cpp in order to add support for your game
 ### Currently supported games:
- - Fortnite
- - Rogue Company
- - Dead By Daylight
- - Witch It
+ - Back 4 Blood
+ - Boundary
  - Brickadia
+ - Dauntless
+ - Dead By Daylight
+ - Fortnite
  - POLYGON
+ - Rogue Company
  - SCUM
  - Scavengers
- - The Isle
  - Splitgate
- - Dauntless
- - Boundary
  - The Cycle: Frontier
+ - The Isle
+ - Witch It
+ 
 ### Supported engine versions: 
 - UE 4.23-4.27
 ### Usage:
