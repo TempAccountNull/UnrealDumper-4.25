@@ -1,4 +1,4 @@
-### Edit engine.cpp in order to add support for your game
+Edit the 'engine.cpp' file to add support for your game.
 ### Currently supported games:
  - Back 4 Blood
  - Boundary
@@ -28,5 +28,6 @@ Options:
   '-w' - wait for input
   '-f packageNameHere' - specifies package where we should look for pointers in paddings (can take a lot of time)
 ```
+
 ### Todo:
 - Analyze functions to get offsets to referenced fields
