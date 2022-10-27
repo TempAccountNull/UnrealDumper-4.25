@@ -13,6 +13,8 @@
  - Dauntless
  - Boundary
  - The Cycle: Frontier
+ - Back 4 Blood
+ 
 ### Supported engine versions: 
 - UE 4.23-4.27
 ### Usage:
