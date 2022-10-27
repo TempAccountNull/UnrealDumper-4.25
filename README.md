@@ -1,6 +1,6 @@
 ### Supported engine versions: 
 - UE 4.23-4.27
-Edit the 'engine.cpp' file to add support for your game.
+- Edit the 'engine.cpp' file to add support for your game.
 ### Currently supported games:
  - Back 4 Blood
  - Boundary
