@@ -470,28 +470,33 @@ struct {
     &Default,
     {"\x4C\x8D\x35\x00\x00\x00\x00\x0F\x10\x07\x83\xFB\x01", 13},
     {"\x48\x8B\x05\x00\x00\x00\x00\x48\x8B\x0C\xC8\x48\x8D\x04\xD1\xEB", 16},
-    [](void* start, void* end) {
-      if (!Decrypt_ANSI) {
-        auto decryptAnsi = FindPointer(start, end, "\xE8\x00\x00\x00\x00\x0F\xB7\x3F\x33\xF6\xC1\xEF\x06\x48\x89\x33\x48\x89\x73\x08\x85\xFF\x0F\x84\x00\x00\x00\x00\x40\x00\x00\x00\x00", 33);
-        if (decryptAnsi) {
-          /*
-          mov [rsp +8], rbx
-          push rdi
-          sub rsp, 0x20
-          mov ebx, edx
-          mov rdi, rcx
-          mov rax, 0xDEADBEEFDEADBEEF
-          jmp rax
-          */
-          uint8 trampoline[] = { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x89, 0xD3, 0x48, 0x89, 0xCF, 0x48, 0xB8, 0xEF, 0xBE, 0xAD, 0xDE, 0xEF, 0xBE, 0xAD, 0xDE, 0xFF, 0xE0 };
-          *(uint64*)(trampoline + 17) = (uint64)((uint8*)decryptAnsi + 0x4A); // https://i.imgur.com/zWtMDar.png
-          Decrypt_ANSI = (ansi_fn)VirtualAlloc(0, sizeof(trampoline), MEM_COMMIT, PAGE_EXECUTE_READWRITE);
-          if (Decrypt_ANSI) {
-            memcpy((void*)Decrypt_ANSI, trampoline, sizeof(trampoline));
-            return true;
+    [](void* start, void* end)
+    {
+      if (!Decrypt_ANSI)
+      {
+        void* decryptAnsi = FindPointer(start, end, "\xE8\x00\x00\x00\x00\x0F\xB7\x3F\x33\xF6\xC1\xEF\x06\x48\x89\x33\x48\x89\x73\x08\x85\xFF\x0F\x84\x00\x00\x00\x00\x40\x00\x00\x00\x00", 33);
+        if (decryptAnsi)
+        {
+            /*
+            mov [rsp +8], rbx
+            push rdi
+            sub rsp, 0x20
+            mov ebx, edx
+            mov rdi, rcx
+            mov rax, 0xDEADBEEFDEADBEEF
+            jmp rax
+            */
+            uint8 trampoline[] = { 0x48, 0x89, 0x5C, 0x24, 0x08, 0x57, 0x48, 0x83, 0xEC, 0x20, 0x89, 0xD3, 0x48, 0x89, 0xCF, 0x48, 0xB8, 0xEF, 0xBE, 0xAD, 0xDE, 0xEF, 0xBE, 0xAD, 0xDE, 0xFF, 0xE0 };
+
+            *reinterpret_cast<uint64*>(trampoline + 17) = reinterpret_cast<uint64>(static_cast<uint8*>(decryptAnsi) + 0x4A); // https://i.imgur.com/zWtMDar.png
+            Decrypt_ANSI = static_cast<ansi_fn>(VirtualAlloc(NULL, sizeof(trampoline), MEM_COMMIT, PAGE_EXECUTE_READWRITE));
+            if (Decrypt_ANSI)
+            {
+                memcpy((void*)Decrypt_ANSI, trampoline, sizeof(trampoline));
+                return true;
+            }
           }
         }
-      }
       return false;
     }
   },
@@ -530,12 +535,12 @@ struct {
    {"\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00\xC6\x05\x00\x00\x00\x00\x01\x0F\x10\x03\x4C\x8D\x44\x24\x20\x48\x8B\xC8",30},
    {"\x48\x8B\x15\x00\x00\x00\x00\x0F\x1F\x44\x00\x00",12},
    nullptr
-  }, 
+  },
   {//Dauntless-Win64-Shipping.exe
    &Default,
-	{"\x48\x8d\x0d\x00\x00\x00\x00\xe8\x00\x00\x00\x00\xc6\x05\x00\x00\x00\x00\x00\x0f\x10\x03", 22}, //GName
-	{"\x48\x8B\x05\x00\x00\x00\x00\xC1\xF9", 9},//Gobject 
-	nullptr
+    {"\x48\x8d\x0d\x00\x00\x00\x00\xe8\x00\x00\x00\x00\xc6\x05\x00\x00\x00\x00\x00\x0f\x10\x03", 22}, //GName
+    {"\x48\x8B\x05\x00\x00\x00\x00\xC1\xF9", 9},//Gobject 
+    nullptr
   },
   {//SquadGame.exe
    &Squad,
@@ -544,9 +549,9 @@ struct {
     nullptr
   },
   {//Back4Blood.exe
-  	&Default,
+    &Default,
      { "\x48\x8D\x05\x00\x00\x00\x00\x48\x83\xC4\x00\x5F\xC3\x48\x89\x5C\x24\x00\x48\x8D\x4C\x24\x00\x48\x89\x6C\x24", 28 }, //GName
-  	 { "\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x8B\x0D", 15 },//Gobject 
+     { "\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x8B\x0D", 15 },//Gobject 
      nullptr
   },
 };
@@ -572,11 +577,6 @@ std::unordered_map<std::string, decltype(&engines[0])> games = {
   {"Prospect-Win64-Shipping",&engines[0]},
   {"SquadGame", &engines[13]},
   {"Back4Blood", &engines[14]},
-};
-
-enum FOUND_TYPES
-{
-	
 };
 
 STATUS EngineInit(std::string game, void* image)
@@ -638,16 +638,18 @@ STATUS EngineInit(std::string game, void* image)
   NamePoolData = *static_cast<decltype(NamePoolData)*>(names);
   ObjObjects = *static_cast<decltype(ObjObjects)*>(objects);
 
-  const auto entry = UE_FNameEntry(NamePoolData.GetEntry(0));
+  const UE_FNameEntry entry = UE_FNameEntry(NamePoolData.GetEntry(0));
 
   // exception handler exclusively for Decrypt_ANSI
-  try {
-    if (*reinterpret_cast<uint32*>(entry.String().data()) != 'enoN') return STATUS::ENGINE_FAILED;
-    printf("[WRN]: None does not exist! FAILING. . .\n");
+  try
+  {
+      if (*reinterpret_cast<uint32*>(entry.String().data()) != 'enoN') return STATUS::ENGINE_FAILED;
+      printf("[WRN]: None does not exist! FAILING. . .\n");
   }
-  catch (...) {
+  catch (...)
+  {
       printf("[ERR] An error has occurred at FNameEntry engine.cpp! FAILING. . .\n");
-    return STATUS::ENGINE_FAILED;
+      return STATUS::ENGINE_FAILED;
   }
 
   return STATUS::SUCCESS;

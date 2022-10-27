@@ -45,7 +45,7 @@ void IterateExSections(void* data, std::function<bool(void*, void*)> callback)
   PIMAGE_NT_HEADERS nt = reinterpret_cast<PIMAGE_NT_HEADERS>(static_cast<uint8*>(data) + dos->e_lfanew);
 
   PIMAGE_SECTION_HEADER section = IMAGE_FIRST_SECTION(nt);
-  for (auto i = 0; i < nt->FileHeader.NumberOfSections; i++, section++)
+  for (int i = 0; i < nt->FileHeader.NumberOfSections; i++, section++)
   {
     if (section->Characteristics & IMAGE_SCN_CNT_CODE)
     {

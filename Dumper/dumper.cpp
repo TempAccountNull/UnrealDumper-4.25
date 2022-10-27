@@ -18,7 +18,7 @@ STATUS Dumper::Init(int argc, char* argv[])
     fs::path processName;
     wchar_t processPath[MAX_PATH]{};
 
-    for (auto i = 1; i < argc; i++)
+    for (int i = 1; i < argc; i++)
     {
         char* arg = argv[i];
         uint16 arg16 = *reinterpret_cast<uint16*>(arg);

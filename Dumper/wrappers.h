@@ -558,31 +558,37 @@ public:
   std::string GetTypeStr() const;
 };
 
-template <typename T> bool UE_UObject::IsA() const {
+template <typename T> bool UE_UObject::IsA() const
+{
   auto cmp = T::StaticClass();
-  if (!cmp) {
+  if (!cmp) 
+  {
     return false;
   }
 
   return IsA(cmp);
 }
 
-class UE_UPackage {
+class UE_UPackage
+{
 private:
-  struct Member {
+  struct Member
+  {
     std::string Type;
     std::string Name;
     uint32 Offset = 0;
     uint32 Size = 0;
   };
-  struct Function {
+  struct Function
+  {
     std::string FullName;
     std::string CppName;
     std::string Params;
     std::string Flags;
     uint64 Func = 0;
   };
-  struct Struct {
+  struct Struct
+  {
     std::string FullName;
     std::string CppName;
     uint32 Inherited = 0;
@@ -590,7 +596,8 @@ private:
     std::vector<Member> Members;
     std::vector<Function> Functions;
   };
-  struct Enum {
+  struct Enum
+  {
     std::string FullName;
     std::string CppName;
     std::vector<std::string> Members;
@@ -603,7 +610,6 @@ private:
   std::vector<Enum> Enums;
 public:
   bool FindPointers = false;
-
 
 private:
   static void GenerateBitPadding(std::vector<Member>& members, uint32 offset, uint8 bitOffset, uint8 size);
