@@ -8,7 +8,11 @@
  - Dauntless
  - Dead By Daylight
  - Fortnite
+ - Foxhole
+ - Icarus
+ - Mordhou
  - POLYGON
+ - Ready or Not
  - Rogue Company
  - SCUM
  - Scavengers
@@ -29,3 +33,7 @@ Options:
 ```
 ### Todo:
 - Analyze functions to get offsets to referenced fields
+
+### Shouts
+- https://github.com/DDbGA/UnrealDumper-4.25 (for Ready or Not, Foxhole, and Icarus)
+- https://github.com/Suwup/UnrealDumper-4.25 (for mordhou)
