@@ -632,6 +632,12 @@ struct {
     {"\x48\x8B\x05\x00\x00\x00\x00\x48\x8B\x14\xC8\x4B\x8D\x0C\x40\x4C\x8D\x04\xCA", 19},
     nullptr
   },
+  {//ProjectCoop-Win64-Shipping.exe
+   &Default,
+    {"\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00\xC6\x05\x00\x00\x00\x00\x01\x0F\x10", 22}, //GName
+    {"\x48\x8B\x05\x00\x00\x00\x00\x48\x8B\x0C\xC8\x48\x8D\x1C\xD1\x8B\x43\x08\x0F\xBA\xE0\x1E\x72\x17", 25}, //Gobject 
+    nullptr
+  },
 };
 
 std::unordered_map<std::string, decltype(&engines[0])> games = {
@@ -648,6 +654,7 @@ std::unordered_map<std::string, decltype(&engines[0])> games = {
   {"Platform-Win64-Shipping", &engines[9]},
   {"PortalWars-Win64-Shipping", &engines[7]},
   {"ProjectBoundarySteam-Win64-Shipping",&engines[0]},
+  {"ProjectCoop-Win64-Shipping",&engines[17]},
   {"PromodClient-Win64-Shipping",&engines[0]},
   {"PropWitchHuntModule-Win64-Shipping", &engines[0]},
   {"Prospect-Win64-Shipping",&engines[0]},
