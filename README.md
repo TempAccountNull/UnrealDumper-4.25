@@ -10,6 +10,7 @@
  - Fortnite
  - Foxhole
  - Icarus
+ - Lunch Lady
  - Mordhou
  - POLYGON
  - Ready or Not
@@ -36,4 +37,5 @@ Options:
 
 ### Shouts
 - https://github.com/DDbGA/UnrealDumper-4.25 (for Ready or Not, Foxhole, and Icarus)
-- https://github.com/Suwup/UnrealDumper-4.25 (for mordhou)
+- https://github.com/Suwup/UnrealDumper-4.25 (for Mordhou)
+- https://github.com/Sukooo/UnrealDumper-4.25 (for Lunch Lady)
