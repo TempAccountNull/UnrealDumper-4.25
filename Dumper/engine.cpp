@@ -626,6 +626,12 @@ struct {
     {"\x48\x8b\x05\x00\x00\x00\x00\x48\x8b\x0c\xc8\x48\x8d\x04\xd1\xeb\x00\x49\x8b\xc7\x81\x48\x08\x00\x00\x00\x40", 28},
     nullptr
   },
+  {//Mordhau
+    &Default,
+    {"\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00\xC6\x05\x00\x00\x00\x00\x01\x0F\x10\x03\x0F\x29\x44\x24\x20\x4C\x8D\x44\x24\x20\x48\x8D\x54\x24\x30\x48\x8B\xC8", 40},
+    {"\x48\x8B\x05\x00\x00\x00\x00\x48\x8B\x14\xC8\x4B\x8D\x0C\x40\x4C\x8D\x04\xCA", 19},
+    nullptr
+  },
 };
 
 std::unordered_map<std::string, decltype(&engines[0])> games = {
@@ -637,6 +643,7 @@ std::unordered_map<std::string, decltype(&engines[0])> games = {
   {"FortniteClient-Win64-Shipping", &engines[5]},
   {"HLL-Win64-Shipping", &engines[0]},
   {"Icarus-Win64-Shipping", &engines[0]},
+  {"Mordhau-Win64-Shipping", &engines[17]},
   {"POLYGON-Win64-Shipping", &engines[4]},
   {"Platform-Win64-Shipping", &engines[9]},
   {"PortalWars-Win64-Shipping", &engines[7]},
@@ -645,8 +652,6 @@ std::unordered_map<std::string, decltype(&engines[0])> games = {
   {"PropWitchHuntModule-Win64-Shipping", &engines[0]},
   {"Prospect-Win64-Shipping",&engines[0]},
   {"ReadyOrNot-Win64-Shipping", &engines[15]},
-  
-  
   {"RogueCompany", &engines[0]},
   {"SCUM", &engines[0]},
   {"Scavenger-Win64-Shipping", &engines[1]},
