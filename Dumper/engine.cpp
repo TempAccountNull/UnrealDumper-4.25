@@ -744,6 +744,8 @@ STATUS EngineInit(std::string game, void* image)
   void* names = nullptr; 
   void* objects = nullptr;
 
+  void* objects1 = (void*)((uintptr_t)objects ^ 0x211C);
+
   int GlobalObjectsXor = 0x211C;
   uint64 GObjects = Base + 0x682D0E0;
   int Object = GObjects ^ GlobalObjectsXor;
