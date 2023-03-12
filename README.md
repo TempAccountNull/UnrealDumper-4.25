@@ -9,6 +9,7 @@
  - Dead By Daylight
  - Fortnite
  - Foxhole
+ - Hogwarts Legacy
  - Icarus
  - Lunch Lady
  - Mordhou
