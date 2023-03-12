@@ -697,6 +697,12 @@ struct {
     {"\x48\x8B\x05\x00\x00\x00\x00\x48\x8B\x0C\xC8\x48\x8D\x1C\xD1\x8B\x43\x08\x0F\xBA\xE0\x1E\x72\x17", 25}, //Gobject 
     nullptr
   },
+  {//HogwartsLegacy.exe
+   &Default,
+    {"\x48\x8D\x00\x00\x00\x00\x00\xEB\x16\x48\x8D\x00\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x48\x8B\xD0\xC6\x05\x00\x00\x00\x00\x00\x48\x8B\x44\x24\x30\x48\xC1\xE8\x20", 41}, //GName
+    {"\x77\x60\x01\x00\x76\x60\x01\x00\x58\x79\x01\x00\x00\x00\x00\x00\x20\x4A\xE8", 19}, //Gobject 
+    nullptr
+  }
 };
 
 std::unordered_map<std::string, decltype(&engines[0])> games = {
@@ -706,6 +712,7 @@ std::unordered_map<std::string, decltype(&engines[0])> games = {
   {"Dauntless-Win64-Shipping",&engines[12]},
   {"DeadByDaylight-Win64-Shipping", &engines[2]},
   {"FortniteClient-Win64-Shipping", &engines[5]},
+  {"HogwartsLegacy",&engines[0]},
   {"HLL-Win64-Shipping", &engines[0]},
   {"Icarus-Win64-Shipping", &engines[0]},
   {"Mordhau-Win64-Shipping", &engines[17]},
