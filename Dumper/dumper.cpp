@@ -126,7 +126,11 @@ STATUS Dumper::Dump() {
     }
 
     size_t size = NULL;
-    NamePoolData.Dump([&file, &size](std::string_view name, uint32_t id) { fmt::print(file, "[{:0>6}] {}\n", id, name); size++; }); fmt::print("Names: {}\n", size);
+    NamePoolData.Dump([&file, &size](std::string_view name, uint32_t id) { 
+            fmt::print(file, "[{:0>6}] {}\n", id, name.data()); 
+            size++; 
+        }); 
+    fmt::print("Names: {}\n", size);
 
     // Why we need to iterate all objects twice? We dumping objects and filling packages simultaneously.
     std::unordered_map<uint8*, std::vector<UE_UObject>> packages;
