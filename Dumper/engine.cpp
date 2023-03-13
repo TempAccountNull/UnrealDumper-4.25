@@ -701,7 +701,13 @@ struct {
     {"\x48\x8D\x00\x00\x00\x00\x00\xEB\x16\x48\x8D\x00\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x48\x8B\xD0\xC6\x05\x00\x00\x00\x00\x00\x48\x8B\x44\x24\x30\x48\xC1\xE8\x20", 41}, //GName
     {"\x77\x60\x01\x00\x76\x60\x01\x00\x58\x79\x01\x00\x00\x00\x00\x00\x20\x4A\xE8", 19}, //Gobject 
     nullptr
-  }
+  },
+  {//DeathlyStillnessBeta-Win64-Shipping.exe
+   &Default,
+    { "\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00\xC6\x05\x00\x00\x00\x00\x01\x0F\x10\x03\x4C\x8D\x44\x24\x20\x48\x8B\xC8", 30 },
+    { "\x48\x8B\x05\x00\x00\x00\x00\x48\x8B\x0C\xC8\x48\x8D\x04\xD1\xEB", 16 },
+    nullptr
+  },
 };
 
 std::unordered_map<std::string, decltype(&engines[0])> games = {
@@ -710,6 +716,7 @@ std::unordered_map<std::string, decltype(&engines[0])> games = {
   {"Brickadia-Win64-Shipping", &engines[3]},
   {"Dauntless-Win64-Shipping",&engines[12]},
   {"DeadByDaylight-Win64-Shipping", &engines[2]},
+  {"DeathlyStillnessBeta-Win64-Shipping",&engines[21]},
   {"FortniteClient-Win64-Shipping", &engines[5]},
   {"HogwartsLegacy",&engines[0]},
   {"HLL-Win64-Shipping", &engines[0]},
